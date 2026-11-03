@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="zh-CN"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;海事招聘会展位查询&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body{background:#f4f7fa;padding:30px 16px;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.wrap{max-width:700px;margin:0 auto;background:#fff;border-radius:14px;padding:26px;box-shadow:0 4px 16px #00000011;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>h1{text-align:center;color:#0f3460;font-size:22px;margin-bottom:24px;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.search{display:flex;gap:8px;margin-bottom:20px;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#kw{flex:1;padding:12px 14px;border:1px solid #d2d8e0;border-radius:8px;font-size:16px;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button{padding:12px 18px;background:#2357a0;color:white;border:0;border-radius:8px;font-size:16px;cursor:pointer;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button:hover{background:#1a4480;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>table{width:100%;border-collapse:collapse;margin-top:10px;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>th,td{padding:12px 8px;border-bottom:1px solid #eee;text-align:left;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>th{background:#f0f5fc;color:#1a4075;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.code{font-weight:bold;color:#2357a0;font-family:Consolas;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.empty{padding:20px;text-align:center;color:#777;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tip{margin-top:14px;text-align:center;font-size:14px;color:#666;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div class="wrap"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;🏢 11.4 上海海事招聘会展位查询&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="search"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;input id="kw" placeholder="输入公司名称，如：马士基、中远海运"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button onclick="search()"&gt;查询&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="result"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="tip"&gt;A馆｜09:00-16:00｜模糊匹配，不用输入全名&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1">const data = [</span></p>
+<p class="p1"><span class="s1">["C1","中远海运船员管理有限公司上海分子公司"],</span></p>
+<p class="p1"><span class="s1">["C2","中远海运船员管理有限公司大连分公司"],</span></p>
+<p class="p1"><span class="s1">["C3","中远海运船员管理有限公司天津分公司"],</span></p>
+<p class="p1"><span class="s1">["C4","中远海运船员管理有限公司广州分公司"],</span></p>
+<p class="p1"><span class="s1">["C5","中远海运船员管理有限公司深圳分公司"],</span></p>
+<p class="p1"><span class="s1">["C6","中远海运船员管理有限公司青岛分公司"],</span></p>
+<p class="p1"><span class="s1">["C7","中远海运航空货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["C8","上海中远海运航空货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["C9","中远海运物流供应链东南区域公司"],</span></p>
+<p class="p1"><span class="s1">["C10","宁波中远海运物流供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["C11","东方海外货柜航运（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["C12","东方海外物流（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["E1","上海深水港船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["E2","上海港复兴船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["E3","上海锦江航运（集团）股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["E4","上海国际港务（集团）股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["E5","上海国际港务（集团）股份有限公司尚东集装箱码头分公司"],</span></p>
+<p class="p1"><span class="s1">["E6","上海冠东国际集装箱码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E7","上海明东集装箱码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E8","上海国际港务（集团）股份有限公司振东集装箱码头分公司"],</span></p>
+<p class="p1"><span class="s1">["E9","上海国际港务（集团）股份有限公司宜东集装箱码头分公司"],</span></p>
+<p class="p1"><span class="s1">["E10","上海盛东国际集装箱码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E11","上海沪东集装箱码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E12","上海港罗东集装箱码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E13","上海海通国际汽车码头有限公司"],</span></p>
+<p class="p1"><span class="s1">["E14","上海国际港务（集团）股份有限公司龙吴分公司"],</span></p>
+<p class="p1"><span class="s1">["E15","上海国际港务（集团）股份有限公司罗泾分公司"],</span></p>
+<p class="p1"><span class="s1">["E16","上海上港联合国际船舶代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["E17","上海港铁联运有限公司"],</span></p>
+<p class="p1"><span class="s1">["E18","上港集团物流有限公司运输分公司"],</span></p>
+<p class="p1"><span class="s1">["E19","上港集团九江港务有限公司"],</span></p>
+<p class="p1"><span class="s1">["E20","上海海勃数科技术有限公司"],</span></p>
+<p class="p1"><span class="s1">["E21","南京深国际港口发展有限公司"],</span></p>
+<p class="p1"><span class="s1">["E22","宁波舟山港舟山港务有限公司"],</span></p>
+<p class="p1"><span class="s1">["E23","泉州港务集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["E24","PSA国际港务集团"],</span></p>
+<p class="p1"><span class="s1">["F1","上海外高桥造船有限公司"],</span></p>
+<p class="p1"><span class="s1">["F2","上海外高桥造船海洋工程有限公司"],</span></p>
+<p class="p1"><span class="s1">["F3","沪东中华造船（集团）有限公司"],</span></p>
+<p class="p1"><span class="s1">["F4","上海港机重工有限公司"],</span></p>
+<p class="p1"><span class="s1">["F5","恒力重工集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["F6","中国船舶电站设备有限公司"],</span></p>
+<p class="p1"><span class="s1">["F7","上海中船三井造船柴油机有限公司"],</span></p>
+<p class="p1"><span class="s1">["F9","上海望峰船舶设备有限公司"],</span></p>
+<p class="p1"><span class="s1">["F10","丹华海事集团"],</span></p>
+<p class="p1"><span class="s1">["F11","江苏扬子江船业集团"],</span></p>
+<p class="p1"><span class="s1">["F12","扬子恒高船舶设计（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["F13","上海浦河工程设计有限公司"],</span></p>
+<p class="p1"><span class="s1">["F14","中交（天津）疏浚工程有限公司"],</span></p>
+<p class="p1"><span class="s1">["F15","舟山市鑫亚船舶修造有限公司"],</span></p>
+<p class="p1"><span class="s1">["F16","上海诚达机械有限公司"],</span></p>
+<p class="p1"><span class="s1">["F17","苏州神远海智能装备科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F18","上海万汇矿产品有限公司"],</span></p>
+<p class="p1"><span class="s1">["F19","海之韵（上海）科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F20","上海远上船舶科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F21","贺博（上海）船舶技术有限公司"],</span></p>
+<p class="p1"><span class="s1">["F22","上海汇舸环保科技集团股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["F23","博雅工道海洋科技集团股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["F24","上海航瑞船舶设备有限公司"],</span></p>
+<p class="p1"><span class="s1">["F25","上海航盛船舶设计有限公司"],</span></p>
+<p class="p1"><span class="s1">["F26","立邦船舶涂料（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["F27","上海乃若诗动力技术有限公司"],</span></p>
+<p class="p1"><span class="s1">["F28","上海浩铂海洋工程有限公司"],</span></p>
+<p class="p1"><span class="s1">["F29","上海浩铂海洋科技股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["F30","上海量远邮轮科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F31","海隆石油海洋工程有限公司"],</span></p>
+<p class="p1"><span class="s1">["F32","上海万方船舶科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F33","上海特瑞多船舶有限公司"],</span></p>
+<p class="p1"><span class="s1">["F34","上海凌朴实业有限公司"],</span></p>
+<p class="p1"><span class="s1">["F35","山东陆海装备集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["F36","加拿大大吉投资有限公司北京代表处"],</span></p>
+<p class="p1"><span class="s1">["F37","上海胜狮集成设备有限公司"],</span></p>
+<p class="p1"><span class="s1">["F38","上海蓝魂环保科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["F39","卯瑞低碳科技（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["F40","上海凯必特船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["G1","中联运通股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["G2","深圳联合国际船舶代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["G3","中联运通控股有限公司"],</span></p>
+<p class="p1"><span class="s1">["G4","北京爱航船务代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["G5","广州港中联国际船务代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H1","敦豪全球货运（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H2","上海丹沙货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H3","中外运普菲斯冷链物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H4","中外运华东物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H5","顺丰速运集团（上海）速运有限公司"],</span></p>
+<p class="p1"><span class="s1">["H6","上海顺丰方家数智供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H7","港中旅华贸国际物流股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H8","海程邦达国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H9","上海交运大件物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H10","上海台骅货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H11","五矿物流集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["H12","北京京盛国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H13","赛蒂国际物流集团"],</span></p>
+<p class="p1"><span class="s1">["H14","上海泓明供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H15","中菲行国际货运代理（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H16","北京仁宇通达供应链管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H17","义达跨境(上海)物流股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H18","美设国际物流集团股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H19","上海旗航供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H20","密尔克卫智能供应链服务集团股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H21","深圳市九方通逊电商物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H22","深圳市六脉速运供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H23","上海创腾国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H24","宁波瑞可星物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H25","上海商凯国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H26","上海云知蓝供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H27","上海威世国际货物运输代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H28","上海长基供应链集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["H29","上海开澜国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H30","汇和达国际货运代理（广州）有限公司宁波分公司"],</span></p>
+<p class="p1"><span class="s1">["H31","宁波准力物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H32","开尔唯科技服务（集团）有限公司上海分公司"],</span></p>
+<p class="p1"><span class="s1">["H33","上海瀚万国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H34","上海立樊供应链管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H35","上海奥冠供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H36","千禧国际货运代理（深圳）有限公司上海分公司"],</span></p>
+<p class="p1"><span class="s1">["H37","启胜国际物流集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["H38","沃尔玛（嘉兴）配送中心有限公司"],</span></p>
+<p class="p1"><span class="s1">["H39","保正（上海）供应链管理股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H40","保正（上海）供应链管理股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H41","优时派跨境物流供应链（深圳）有限公司上海分公司"],</span></p>
+<p class="p1"><span class="s1">["H42","深圳合聚新国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H43","上海畅联国际物流股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H44","上海环世物流（集团）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H45","深圳市长帆国际物流股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["H46","信风（宁波）海运物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H47","捷应加国际物流(上海)有限公司"],</span></p>
+<p class="p1"><span class="s1">["H48","上海德威航空国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H49","上海进贤通国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H50","上海万广集装箱服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["H51","上海华展申鹏国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H52","深圳市华展国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H53","上海特普沃德国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H54","青岛海骏物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H55","昇鸿（上海）物流咨询有限公司"],</span></p>
+<p class="p1"><span class="s1">["H56","上海朗茂国际货物运输代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H57","上海朝茂国际货物运输代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H58","上海锦泓国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H59","山东临沂港国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H60","山东吉程智联国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H61","上海骊骅国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H62","上海易佩司国际物流（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H63","上海运达国际货物运输代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H64","和运达国际物流（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H65","上海悦东国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H66","上海舜欣物流集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["H67","古布达士国际物流（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H68","上海海伟国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H69","上海硕顶货运（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H70","上海骊捷国际货运有限公司"],</span></p>
+<p class="p1"><span class="s1">["H71","上海愉帆国际货物运输代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H72","上海天融供应链有限公司"],</span></p>
+<p class="p1"><span class="s1">["H73","深圳市华诚慧运国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H74","上海宏达国际货运有限公司"],</span></p>
+<p class="p1"><span class="s1">["H75","融商物流（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H76","上海源鑫国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H77","近铁国际物流（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H78","上海典航国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H79","上海威恒国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H80","德威国际货运代理上海有限公司"],</span></p>
+<p class="p1"><span class="s1">["H81","上海谦成国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H82","上海立远恒通物流发展有限公司"],</span></p>
+<p class="p1"><span class="s1">["H83","大连启航国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H84","上海驻韵尚国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H85","田泽（上海）国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H86","寰宇义嘉国际物流（北京）有限公司"],</span></p>
+<p class="p1"><span class="s1">["H87","上海邑麟储运有限公司"],</span></p>
+<p class="p1"><span class="s1">["H88","浙江国际海运职业技术学院"],</span></p>
+<p class="p1"><span class="s1">["H89","深圳海盛威国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H90","上海冠亚国际物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H91","广州欧华国际货运代理有限公司上海分公司"],</span></p>
+<p class="p1"><span class="s1">["H92","厦门汇英国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H93","深圳市肆海八荒跨境物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["H94","上海淳宏供应链管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H95","上海翼舶港信息技术有限公司"],</span></p>
+<p class="p1"><span class="s1">["H96","上海乃正国际货运代理有限公司"],</span></p>
+<p class="p1"><span class="s1">["H97","厦门象屿股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D1","利胜地中海航运（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D2","地中海航运船舶管理（宁波）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D3","地中海捷运（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D4","以星综合航运（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D5","以星物流（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D6","马士基物流(上海)有限公司"],</span></p>
+<p class="p1"><span class="s1">["D7","川崎汽船（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D8","日邮物流（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D9","长荣国际船务（深圳）有限责任公司上海分公司"],</span></p>
+<p class="p1"><span class="s1">["D10","中外运集装箱运输有限公司"],</span></p>
+<p class="p1"><span class="s1">["D11","中波轮船股份公司"],</span></p>
+<p class="p1"><span class="s1">["D12","招商局南京油运股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D13","上海招商明华船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D14","上海海商航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D15","中谷海运集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["D16","上海海丰海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D17","新海丰物流有限公司"],</span></p>
+<p class="p1"><span class="s1">["D18","韦立国际集团"],</span></p>
+<p class="p1"><span class="s1">["D19","青岛中几海员劳务服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D20","深圳海顺海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D21","武汉海顺海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D22","广东省港航集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["D23","珠江船务企业（集团）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D24","广东省湛江航运集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["D25","上海中船海员管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D26","山东海运海员劳务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D27","福建省海运集团有限责任公司"],</span></p>
+<p class="p1"><span class="s1">["D28","泉州中泉国际经济技术合作（集团）有限公司船务分公司"],</span></p>
+<p class="p1"><span class="s1">["D29","江苏远洋船员管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D30","浙江省海运集团船务管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D31","宁波海运股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D32","宁波远洋运输股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D33","河北远洋运输集团股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D34","大连华洋海事有限公司"],</span></p>
+<p class="p1"><span class="s1">["D35","华洋海事中心有限公司"],</span></p>
+<p class="p1"><span class="s1">["D36","上海华洋海事科技发展有限公司"],</span></p>
+<p class="p1"><span class="s1">["D37","青岛岛之星船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D38","青岛恩兰姆国际船舶服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D39","山东聚安国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D40","上海万轮兴船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D41","山东弘际国际船员管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D42","上海化和海事服务有限公司(君正船务)"],</span></p>
+<p class="p1"><span class="s1">["D43","上海森海海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D44","海盾船员管理（深圳）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D45","上海鑫裕盛船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D46","中国海洋工程有限公司"],</span></p>
+<p class="p1"><span class="s1">["D47","大连国合航业船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D48","大连国合海事技术服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D49","裕民（厦门）国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D50","舟山东方船员服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D51","南京金建业船员管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D52","青岛瑞升国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D53","上海昱平海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D54","北京鑫裕盛船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D55","上海广嘉国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D56","深圳勇春国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D57","厦门泛海国际船舶管理有限公司"],</span></p>
+<p class="p1"><span class="s1">["D58","中源船务-思坦达得（船员）服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D59","沪安航（上海）海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D60","江苏长扬船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D61","杰西圈（上海）科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["D62","海液通航运（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D63","江苏新海船海运有限公司/南京新海船船舶管理公司"],</span></p>
+<p class="p1"><span class="s1">["D64","德胜满航运（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D65","芜湖隆罐航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D66","上海鼎衡航运科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["D67","卫狮船务发展(上海)有限公司"],</span></p>
+<p class="p1"><span class="s1">["D68","上海名信游船有限公司"],</span></p>
+<p class="p1"><span class="s1">["D69","武汉巡洋对外劳务合作有限公司"],</span></p>
+<p class="p1"><span class="s1">["D70","上海浦江游览集团有限公司"],</span></p>
+<p class="p1"><span class="s1">["D71","鑫睿洋（上海）船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D72","上海安舸船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D73","南京金建业船务集团"],</span></p>
+<p class="p1"><span class="s1">["D74","深圳华威近海船舶运输股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D75","上海讷沣航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D76","南京浩瑞达船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D77","南京金祥远洋海运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D78","上海瀚航船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D79","宁波锦德航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D80","泰华-上海鹤圣船舶科技有限公司"],</span></p>
+<p class="p1"><span class="s1">["D81","上海爱西恩海事服务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D82","天津新里程航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D83","上海晟世船务有限公司"],</span></p>
+<p class="p1"><span class="s1">["D84","浙江拍船网航运交易股份有限公司"],</span></p>
+<p class="p1"><span class="s1">["D85","上海航运交易所"],</span></p>
+<p class="p1"><span class="s1">["D86","中国船东互保协会"],</span></p>
+<p class="p1"><span class="s1">["D87","交通运输部上海打捞局"],</span></p>
+<p class="p1"><span class="s1">["D88","新联船级社（上海）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D89","韩国船级社（中国）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D90","嘉富航运（香港）有限公司"],</span></p>
+<p class="p1"><span class="s1">["D91","大连信风海运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D92","上海汉信航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D93","上海长宏航运有限公司"],</span></p>
+<p class="p1"><span class="s1">["D94","香港特别行政区远邦集团控股有限公司上海代表处"],</span></p>
+<p class="p1"><span class="s1">["D95","耀洋航运集团"],</span></p>
+<p class="p1"><span class="s1">["D96","上海华洋保险经纪有限公司"],</span></p>
+<p class="p1"><span class="s1">["D97","Sinoway Chartering (Group) Limited"],</span></p>
+<p class="p1"><span class="s1">["D98","SAL Heavy Lift GmbH &amp; Co. KG"],</span></p>
+<p class="p1"><span class="s1">["D99","Poplars Maritime Consulting 白杨海事咨询公司"],</span></p>
+<p class="p1"><span class="s1">["D100","CENTURYSCOPE"],</span></p>
+<p class="p1"><span class="s1">["D101","Winkey Shipping Co., Ltd"],</span></p>
+<p class="p1"><span class="s1">["D102","Bromar Shipping Limited"],</span></p>
+<p class="p1"><span class="s1">["D103","TOPSHEEN SHIPPING LIMITED"],</span></p>
+<p class="p1"><span class="s1">["D104","Wellerman Shipping Pte Ltd"],</span></p>
+<p class="p1"><span class="s1">["D105","YU AN SHIPPING PTE. LTD."],</span></p>
+<p class="p1"><span class="s1">["D106","RGL SHIPPING SINGAPORE PTE LTD"],</span></p>
+<p class="p1"><span class="s1">["D107","大连港轮驳分公司"],</span></p>
+<p class="p1"><span class="s1">["D108","宁波油港轮驳分公司"],</span></p>
+<p class="p1"><span class="s1">["D109","北海海运职业学院"]</span></p>
+<p class="p1"><span class="s1">];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function search(){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let kw = document.getElementById("kw").value.trim().toLowerCase();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const resDom = document.getElementById("result");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if(!kw){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>resDom.innerHTML = "&lt;div class='empty'&gt;请输入公司名称&lt;/div&gt;";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let hit = data.filter(item=&gt; item[1].toLowerCase().includes(kw));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if(hit.length ===0){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>resDom.innerHTML = "&lt;div class='empty'&gt;❌ 未找到匹配企业&lt;/div&gt;";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let html = "&lt;table&gt;&lt;tr&gt;&lt;th&gt;展位编号&lt;/th&gt;&lt;th&gt;公司名称&lt;/th&gt;&lt;/tr&gt;";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>hit.forEach(row=&gt;{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>html += `&lt;tr&gt;&lt;td&gt;&lt;span class="code"&gt;${row[0]}&lt;/span&gt;&lt;/td&gt;&lt;td&gt;${row[1]}&lt;/td&gt;&lt;/tr&gt;`</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>html += "&lt;/table&gt;";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>resDom.innerHTML = html;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
